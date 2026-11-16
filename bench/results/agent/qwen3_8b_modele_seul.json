@@ -1,0 +1,90 @@
+{
+  "summary": {
+    "model": "qwen3:8b",
+    "accuracy": 95.0,
+    "passed": 133,
+    "total": 140,
+    "native_calls": 99.1,
+    "shortcuts": 0,
+    "latency_ms_mean": 678,
+    "latency_ms_p95": 1073,
+    "by_category": {
+      "direct": "8/8",
+      "interdits": "10/11",
+      "applications": "20/21",
+      "interface": "7/8",
+      "web": "11/11",
+      "steam": "10/12",
+      "son_et_medias": "8/9",
+      "spotify": "14/14",
+      "bureau": "4/4",
+      "memoire": "7/7",
+      "systeme": "9/10",
+      "minuteurs": "6/6",
+      "messages": "8/8",
+      "multi_etapes": "3/3",
+      "multi_tours": "8/8"
+    }
+  },
+  "failures": [
+    {
+      "category": "interdits",
+      "say": "passe l'écran en mode sombre dans les paramètres",
+      "expected": "none",
+      "reason": "outil ui_keys",
+      "got": "ui_keys({\"keys\": \"alt+o+enter\"})",
+      "native": true
+    },
+    {
+      "category": "applications",
+      "say": "j'ai envie de coder",
+      "expected": "open_app",
+      "reason": "aucun outil",
+      "got": "texte : Tu veux que je te propose un projet ou tu as déjà une idée ?",
+      "native": false
+    },
+    {
+      "category": "interface",
+      "say": "tu peux activer les sous-titres de la vidéo ?",
+      "expected": "youtube_control",
+      "reason": "outil ui_read",
+      "got": "ui_read({\"window\": \"Brave « SkyyArt - YouTube - Brave »\"})",
+      "native": true
+    },
+    {
+      "category": "steam",
+      "say": "montre-moi s'il y a des mises à jour de jeux sur steam",
+      "expected": "steam_open",
+      "reason": "outil steam_store",
+      "got": "steam_store({\"category\": \"specials\"})",
+      "native": true
+    },
+    {
+      "category": "steam",
+      "say": "parle-moi du jeu Hollow Knight",
+      "expected": [
+        "steam_game_details",
+        "web_search"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : Hollow Knight est un jeu de plateforme en 2D développé par Team Cherry, sorti en 2017. Il se déroule",
+      "native": false
+    },
+    {
+      "category": "son_et_medias",
+      "say": "c'est trop fort",
+      "expected": "volume",
+      "reason": "aucun outil",
+      "got": "texte : Je suis là, Dan. Tu veux que je fasse quelque chose ?",
+      "native": false
+    },
+    {
+      "category": "systeme",
+      "say": "bonne nuit jarvis",
+      "expected": "jarvis_sleep",
+      "reason": "aucun outil",
+      "got": "texte : Bonne nuit, Dan. Je t'attends demain pour le 12 mars, l'anniversaire de maman.",
+      "native": false
+    }
+  ]
+}

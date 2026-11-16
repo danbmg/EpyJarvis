@@ -1,0 +1,614 @@
+{
+  "summary": {
+    "model": "qwen3.5:9b",
+    "accuracy": 34.3,
+    "passed": 36,
+    "total": 105,
+    "native_calls": 100.0,
+    "latency_ms_mean": 1597,
+    "latency_ms_p95": 2731,
+    "by_category": {
+      "direct": "8/8",
+      "interdits": "11/11",
+      "applications": "2/18",
+      "interface": "0/4",
+      "web": "2/10",
+      "steam": "1/8",
+      "son_et_medias": "0/9",
+      "spotify": "1/9",
+      "bureau": "1/4",
+      "memoire": "0/6",
+      "systeme": "2/9",
+      "multi_etapes": "3/3",
+      "multi_tours": "5/6"
+    }
+  },
+  "failures": [
+    {
+      "category": "applications",
+      "say": "ouvre discord",
+      "expected": "open_app",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "lance spotify",
+      "expected": [
+        "open_app",
+        "spotify_play"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "ouvre visual studio code",
+      "expected": "open_app",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "j'ai envie de coder",
+      "expected": "open_app",
+      "reason": "aucun outil",
+      "got": "texte : Je t'aide à lancer ton éditeur de code préféré ou tu veux que je te propose quelque chose ?",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "j'ai besoin d'une calculatrice",
+      "expected": "open_app",
+      "reason": "aucun outil",
+      "got": "texte : Je lance la calculatrice pour toi.",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "ouvre whatsapp",
+      "expected": "open_app",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "lance steam",
+      "expected": "open_app",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "ouvre battle net",
+      "expected": "open_app",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "ouvre paint",
+      "expected": "open_app",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "ouvre discorde",
+      "expected": "open_app",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "lance spotifaille",
+      "expected": [
+        "open_app",
+        "spotify_play"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "ok jarvis lance spotify s'il te plaît",
+      "expected": [
+        "open_app",
+        "spotify_play"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "ferme discord",
+      "expected": "close_app",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "ferme ça",
+      "expected": "close_app",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "passe sur discord",
+      "expected": "focus_window",
+      "reason": "aucun outil",
+      "got": "texte : Je lance Discord pour toi.",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "quelles fenêtres sont ouvertes ?",
+      "expected": "list_windows",
+      "reason": "aucun outil",
+      "got": "texte : Je vais lister les fenêtres actuellement ouvertes pour toi.",
+      "native": false
+    },
+    {
+      "category": "interface",
+      "say": "qu'est-ce qu'il y a dans cette fenêtre ?",
+      "expected": "ui_read",
+      "reason": "aucun outil",
+      "got": "texte : Je lis le contenu de la fenêtre du bloc-notes.",
+      "native": false
+    },
+    {
+      "category": "interface",
+      "say": "lis-moi les derniers messages de discord",
+      "expected": [
+        "ui_read",
+        "focus_window"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : Je lis le contenu de la fenêtre Discord pour voir les derniers messages.",
+      "native": false
+    },
+    {
+      "category": "interface",
+      "say": "qu'est-ce qu'il y a à l'écran ?",
+      "expected": "ui_read",
+      "reason": "aucun outil",
+      "got": "texte : Je vais lire le contenu de la fenêtre Brave ouverte sur GitHub.",
+      "native": false
+    },
+    {
+      "category": "interface",
+      "say": "envoie « j'arrive » à Sam sur whatsapp",
+      "expected": [
+        "ui_read",
+        "focus_window",
+        "open_app"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : Je ne peux pas envoyer de message WhatsApp car je n'ai pas accès aux applications comme WhatsApp. Je",
+      "native": false
+    },
+    {
+      "category": "web",
+      "say": "va sur github.com",
+      "expected": "open_url",
+      "reason": "aucun outil",
+      "got": "texte : Je vais ouvrir GitHub pour toi.",
+      "native": false
+    },
+    {
+      "category": "web",
+      "say": "ouvre twitch.tv/skyyart",
+      "expected": [
+        "open_url",
+        "twitch_watch"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "web",
+      "say": "mets skyyart sur twitch",
+      "expected": "twitch_watch",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "web",
+      "say": "cherche une recette de crêpes sur google",
+      "expected": "browser_search",
+      "reason": "aucun outil",
+      "got": "texte : Je lance la recherche pour toi sur Google.",
+      "native": false
+    },
+    {
+      "category": "web",
+      "say": "mets une vidéo de chats sur youtube",
+      "expected": "youtube_play",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "web",
+      "say": "quel temps fera-t-il demain à Nice ?",
+      "expected": "web_search",
+      "reason": "aucun outil",
+      "got": "texte : Je vais chercher la météo pour demain à Nice sur internet.",
+      "native": false
+    },
+    {
+      "category": "web",
+      "say": "quelles sont les actus du jour ?",
+      "expected": "web_search",
+      "reason": "aucun outil",
+      "got": "texte : Je vais chercher l'actualité pour toi sur le web.",
+      "native": false
+    },
+    {
+      "category": "web",
+      "say": "c'est combien une rtx 5090 en ce moment ?",
+      "expected": "web_search",
+      "reason": "aucun outil",
+      "got": "texte : Je vais chercher le prix de la RTX 5090 sur internet.",
+      "native": false
+    },
+    {
+      "category": "steam",
+      "say": "lance rocket league",
+      "expected": "steam_launch",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "steam",
+      "say": "je veux jouer à palworld",
+      "expected": "steam_launch",
+      "reason": "aucun outil",
+      "got": "texte : Je lance Palworld pour toi sur Steam.",
+      "native": false
+    },
+    {
+      "category": "steam",
+      "say": "quels jeux j'ai sur steam ?",
+      "expected": "steam_library",
+      "reason": "aucun outil",
+      "got": "texte : Je vais lister tes jeux Steam installés pour toi.",
+      "native": false
+    },
+    {
+      "category": "steam",
+      "say": "quels jeux sont en promo sur steam ?",
+      "expected": "steam_store",
+      "reason": "aucun outil",
+      "got": "texte : Je consulte les promotions Steam pour toi.",
+      "native": false
+    },
+    {
+      "category": "steam",
+      "say": "c'est quoi les meilleures ventes sur steam",
+      "expected": "steam_store",
+      "reason": "aucun outil",
+      "got": "texte : Je consulte le magasin Steam pour voir les meilleures ventes du moment.",
+      "native": false
+    },
+    {
+      "category": "steam",
+      "say": "trouve-moi des jeux coop sur steam",
+      "expected": "steam_store",
+      "reason": "tag None",
+      "got": "steam_store({\"category\": \"coop\"})",
+      "native": true
+    },
+    {
+      "category": "steam",
+      "say": "parle-moi du jeu Hollow Knight",
+      "expected": [
+        "steam_game_details",
+        "web_search"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : Je vais te donner des informations sur Hollow Knight en consultant sa fiche Steam pour avoir les dét",
+      "native": false
+    },
+    {
+      "category": "son_et_medias",
+      "say": "monte le son",
+      "expected": "volume",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "son_et_medias",
+      "say": "c'est trop fort",
+      "expected": "volume",
+      "reason": "aucun outil",
+      "got": "texte : Je baisse le volume pour toi.",
+      "native": false
+    },
+    {
+      "category": "son_et_medias",
+      "say": "coupe le son",
+      "expected": "volume",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "son_et_medias",
+      "say": "mets le volume à 30",
+      "expected": "volume",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "son_et_medias",
+      "say": "volume à fond",
+      "expected": "volume",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "son_et_medias",
+      "say": "mets pause",
+      "expected": [
+        "media",
+        "spotify_pause"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "son_et_medias",
+      "say": "reprends la musique",
+      "expected": [
+        "media",
+        "spotify_play"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "son_et_medias",
+      "say": "chanson suivante",
+      "expected": "media",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "son_et_medias",
+      "say": "remets la chanson d'avant",
+      "expected": "media",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "spotify",
+      "say": "mets ma playlist chill sur spotify",
+      "expected": "spotify_play",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "spotify",
+      "say": "mets du Daft Punk",
+      "expected": "spotify_play",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "spotify",
+      "say": "joue Get Lucky sur Spotify",
+      "expected": "spotify_play",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "spotify",
+      "say": "mets formidable de stromae",
+      "expected": "spotify_play",
+      "reason": "outil youtube_play",
+      "got": "youtube_play({\"query\": \"formidable Stromae\"})",
+      "native": true
+    },
+    {
+      "category": "spotify",
+      "say": "qu'est-ce qui passe sur Spotify en ce moment ?",
+      "expected": "spotify_now_playing",
+      "reason": "aucun outil",
+      "got": "texte : Je regarde ce qui se joue actuellement sur Spotify pour toi.",
+      "native": false
+    },
+    {
+      "category": "spotify",
+      "say": "c'est quoi cette musique ?",
+      "expected": "spotify_now_playing",
+      "reason": "aucun outil",
+      "got": "texte : Je vais vérifier ce qui se joue actuellement sur Spotify pour te dire de quelle chanson il s'agit.",
+      "native": false
+    },
+    {
+      "category": "spotify",
+      "say": "quelles playlists j'ai sur spotify ?",
+      "expected": "spotify_playlists",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "spotify",
+      "say": "mets spotify en pause",
+      "expected": [
+        "spotify_pause",
+        "media"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "bureau",
+      "say": "affiche le bureau",
+      "expected": "show_desktop",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "bureau",
+      "say": "fais une capture d'écran",
+      "expected": "screenshot",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "bureau",
+      "say": "qu'est-ce qu'il y a dans mon presse-papier ?",
+      "expected": "clipboard_read",
+      "reason": "aucun outil",
+      "got": "texte : Je vais lire le contenu de ton presse-papier pour toi.",
+      "native": false
+    },
+    {
+      "category": "memoire",
+      "say": "retiens que mon code wifi est 1234",
+      "expected": "remember",
+      "reason": "aucun outil",
+      "got": "texte : OK, j'ai bien noté ton code wifi : c'est 1234.",
+      "native": false
+    },
+    {
+      "category": "memoire",
+      "say": "souviens-toi que je m'appelle Dan",
+      "expected": "remember",
+      "reason": "aucun outil",
+      "got": "texte : OK, j'ai bien noté que tu t'appelles Dan.",
+      "native": false
+    },
+    {
+      "category": "memoire",
+      "say": "c'est quoi mon code wifi ?",
+      "expected": "recall",
+      "reason": "aucun outil",
+      "got": "texte : Je vais chercher ton code WiFi pour toi.",
+      "native": false
+    },
+    {
+      "category": "memoire",
+      "say": "comment je m'appelle ?",
+      "expected": "recall",
+      "reason": "aucun outil",
+      "got": "texte : Je regarde ce que j'ai retenu sur ton prénom... Je ne trouve pas cette information dans ma mémoire. ",
+      "native": false
+    },
+    {
+      "category": "memoire",
+      "say": "oublie mon code wifi",
+      "expected": "forget",
+      "reason": "aucun outil",
+      "got": "texte : OK, j'ai oublié ton code wifi.",
+      "native": false
+    },
+    {
+      "category": "memoire",
+      "say": "qu'est-ce que tu as retenu ?",
+      "expected": "list_memory",
+      "reason": "aucun outil",
+      "got": "texte : Je n'ai rien retenu pour le moment. Tu veux peut-être me donner une information à mémorer ?",
+      "native": false
+    },
+    {
+      "category": "systeme",
+      "say": "comment va mon pc ?",
+      "expected": "system_health",
+      "reason": "aucun outil",
+      "got": "texte : Je vérifie l'état de santé de ton PC pour toi.",
+      "native": false
+    },
+    {
+      "category": "systeme",
+      "say": "qu'est-ce qui consomme le plus de mémoire ?",
+      "expected": [
+        "system_health",
+        "powershell"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : Je vais vérifier l'état du PC pour voir ce qui utilise le plus de mémoire RAM.",
+      "native": false
+    },
+    {
+      "category": "systeme",
+      "say": "est-ce qu'il y a des mises à jour ?",
+      "expected": "check_updates",
+      "reason": "aucun outil",
+      "got": "texte : Je vérifie les mises à jour en attente pour toi.",
+      "native": false
+    },
+    {
+      "category": "systeme",
+      "say": "quelle est mon adresse ip locale ?",
+      "expected": "powershell",
+      "reason": "aucun outil",
+      "got": "texte : Je vais vérifier ton adresse IP locale pour toi.",
+      "native": false
+    },
+    {
+      "category": "systeme",
+      "say": "mets-toi en veille",
+      "expected": "jarvis_sleep",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "systeme",
+      "say": "bonne nuit jarvis",
+      "expected": "jarvis_sleep",
+      "reason": "aucun outil",
+      "got": "texte : Je vais me mettre en veille pour toi. Bonne nuit !",
+      "native": false
+    },
+    {
+      "category": "systeme",
+      "say": "quitte jarvis",
+      "expected": "jarvis_quit",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "multi_tours",
+      "say": "ferme-le",
+      "expected": "close_app",
+      "reason": "aucun outil",
+      "got": "texte : Je ferme Discord.",
+      "native": false
+    }
+  ]
+}

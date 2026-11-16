@@ -1,0 +1,171 @@
+{
+  "summary": {
+    "model": "qwen2.5:7b",
+    "accuracy": 83.8,
+    "passed": 88,
+    "total": 105,
+    "native_calls": 59.5,
+    "latency_ms_mean": 561,
+    "latency_ms_p95": 1040,
+    "by_category": {
+      "direct": "8/8",
+      "interdits": "11/11",
+      "applications": "15/18",
+      "interface": "2/4",
+      "web": "10/10",
+      "steam": "6/8",
+      "son_et_medias": "5/9",
+      "spotify": "8/9",
+      "bureau": "4/4",
+      "memoire": "4/6",
+      "systeme": "8/9",
+      "multi_etapes": "3/3",
+      "multi_tours": "4/6"
+    }
+  },
+  "failures": [
+    {
+      "category": "applications",
+      "say": "j'ai envie de coder",
+      "expected": "open_app",
+      "reason": "aucun outil",
+      "got": "texte : OK  Pour commencer à coder, as-tu une application ou un éditeur spécifique en tête ? Par exemple, tu",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "j'ai besoin d'une calculatrice",
+      "expected": "open_app",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "applications",
+      "say": "passe sur discord",
+      "expected": "focus_window",
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "interface",
+      "say": "qu'est-ce qu'il y a à l'écran ?",
+      "expected": "ui_read",
+      "reason": "aucun outil",
+      "got": "texte : Brave affiche la page de connexion de GitHub.",
+      "native": false
+    },
+    {
+      "category": "interface",
+      "say": "envoie « j'arrive » à Sam sur whatsapp",
+      "expected": [
+        "ui_read",
+        "focus_window",
+        "open_app"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : Je ne peux pas envoyer de message sur WhatsApp car je n'ai pas accès à cette application. Je vous su",
+      "native": false
+    },
+    {
+      "category": "steam",
+      "say": "lance rocket league",
+      "expected": "steam_launch",
+      "reason": "outil open_app",
+      "got": "open_app({\"name\": \"rocket league\"})",
+      "native": false
+    },
+    {
+      "category": "steam",
+      "say": "trouve-moi des jeux coop sur steam",
+      "expected": "steam_store",
+      "reason": "tag None",
+      "got": "steam_store({\"category\": \"coop\"})",
+      "native": true
+    },
+    {
+      "category": "son_et_medias",
+      "say": "c'est trop fort",
+      "expected": "volume",
+      "reason": "aucun outil",
+      "got": "texte : Qu'est-ce qui est trop fort, mardi ? Tout va bien ?",
+      "native": false
+    },
+    {
+      "category": "son_et_medias",
+      "say": "mets le volume à 30",
+      "expected": "volume",
+      "reason": "level 'down'",
+      "got": "volume({\"level\": \"down\"})",
+      "native": false
+    },
+    {
+      "category": "son_et_medias",
+      "say": "mets pause",
+      "expected": [
+        "media",
+        "spotify_pause"
+      ],
+      "reason": "aucun outil",
+      "got": "texte : OK",
+      "native": false
+    },
+    {
+      "category": "son_et_medias",
+      "say": "remets la chanson d'avant",
+      "expected": "media",
+      "reason": "command 'play_pause'",
+      "got": "media({\"command\": \"play_pause\"})",
+      "native": false
+    },
+    {
+      "category": "spotify",
+      "say": "c'est quoi cette musique ?",
+      "expected": "spotify_now_playing",
+      "reason": "aucun outil",
+      "got": "texte : C'est une chanson de Farazi appelée \"Sandığımdan\".",
+      "native": false
+    },
+    {
+      "category": "memoire",
+      "say": "comment je m'appelle ?",
+      "expected": "recall",
+      "reason": "aucun outil",
+      "got": "texte : Pour savoir ton nom, j'aurais besoin que tu me le dises ou que tu me le rappelles. Tu peux me dire \"",
+      "native": false
+    },
+    {
+      "category": "memoire",
+      "say": "oublie mon code wifi",
+      "expected": "forget",
+      "reason": "aucun outil",
+      "got": "texte : forgettable wifi",
+      "native": false
+    },
+    {
+      "category": "systeme",
+      "say": "combien de fichiers il y a sur mon bureau ?",
+      "expected": "powershell",
+      "reason": "aucun outil",
+      "got": "texte : ",
+      "native": false
+    },
+    {
+      "category": "multi_tours",
+      "say": "ferme-le",
+      "expected": "close_app",
+      "reason": "aucun outil",
+      "got": "texte : Je ferme Discord.",
+      "native": false
+    },
+    {
+      "category": "multi_tours",
+      "say": "en fait c'est 5678",
+      "expected": "remember",
+      "reason": "outil forget",
+      "got": "forget({\"key\": \"code wifi\"})",
+      "native": true
+    }
+  ]
+}
