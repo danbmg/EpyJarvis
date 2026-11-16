@@ -1,0 +1,21 @@
+{
+  "summary": {
+    "model": "qwen2.5:7b",
+    "accuracy": 99.3,
+    "passed": 137,
+    "total": 138,
+    "latency_ms_mean": 398,
+    "latency_ms_p95": 482
+  },
+  "failures": [
+    {
+      "say": "cache tout",
+      "expected": "minimize",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    }
+  ]
+}

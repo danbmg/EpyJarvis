@@ -1,0 +1,185 @@
+{
+  "summary": {
+    "model": "qwen2.5:7b",
+    "accuracy": 87.7,
+    "passed": 121,
+    "total": 138,
+    "latency_ms_mean": 400,
+    "latency_ms_p95": 492
+  },
+  "failures": [
+    {
+      "say": "montre-moi tes commandes",
+      "expected": "help",
+      "reason": "action google_search",
+      "got": {
+        "action": "google_search",
+        "args": {
+          "query": "mes commandes"
+        }
+      }
+    },
+    {
+      "say": "lance spotify",
+      "expected": "open_app",
+      "reason": "action launch_game",
+      "got": {
+        "action": "launch_game",
+        "args": {
+          "game": "spotify"
+        }
+      }
+    },
+    {
+      "say": "lance steam",
+      "expected": "open_app",
+      "reason": "action launch_game",
+      "got": {
+        "action": "launch_game",
+        "args": {
+          "game": "steam"
+        }
+      }
+    },
+    {
+      "say": "lance blizzard",
+      "expected": "open_app",
+      "reason": "action launch_game",
+      "got": {
+        "action": "launch_game",
+        "args": {
+          "game": "battlenet"
+        }
+      }
+    },
+    {
+      "say": "lance minecraft",
+      "expected": "open_app",
+      "reason": "action launch_game",
+      "got": {
+        "action": "launch_game",
+        "args": {
+          "game": "minecraft"
+        }
+      }
+    },
+    {
+      "say": "lance spotifaille",
+      "expected": "open_app",
+      "reason": "action launch_game",
+      "got": {
+        "action": "launch_game",
+        "args": {
+          "game": "spotify"
+        }
+      }
+    },
+    {
+      "say": "plus fort",
+      "expected": "volume",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "c'est trop fort",
+      "expected": "volume",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "remets le son",
+      "expected": "volume",
+      "reason": "level 'up'",
+      "got": {
+        "action": "volume",
+        "args": {
+          "level": "up"
+        }
+      }
+    },
+    {
+      "say": "cache tout",
+      "expected": "minimize",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "comment je m'appelle ?",
+      "expected": "recall",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "où est garée ma voiture",
+      "expected": "recall",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "qu'est-ce que tu as retenu",
+      "expected": "list_memory",
+      "reason": "action recall",
+      "got": {
+        "action": "recall",
+        "args": {
+          "key": "rien"
+        }
+      }
+    },
+    {
+      "say": "tu te souviens de quoi ?",
+      "expected": "list_memory",
+      "reason": "action recall",
+      "got": {
+        "action": "recall",
+        "args": {
+          "key": "quoi"
+        }
+      }
+    },
+    {
+      "say": "éteins l'ordinateur",
+      "expected": "unknown",
+      "reason": "action quit",
+      "got": {
+        "action": "quit",
+        "args": {}
+      }
+    },
+    {
+      "say": "ferme discord",
+      "expected": "unknown",
+      "reason": "action open_app",
+      "got": {
+        "action": "open_app",
+        "args": {
+          "app": "discord"
+        }
+      }
+    },
+    {
+      "say": "ferme spotify",
+      "expected": "unknown",
+      "reason": "action media_previous",
+      "got": {
+        "action": "media_previous",
+        "args": {}
+      }
+    }
+  ]
+}

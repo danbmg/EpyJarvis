@@ -1,0 +1,275 @@
+{
+  "summary": {
+    "model": "mistral",
+    "accuracy": 81.2,
+    "passed": 112,
+    "total": 138,
+    "latency_ms_mean": 419,
+    "latency_ms_p95": 464
+  },
+  "failures": [
+    {
+      "say": "yo jarvis",
+      "expected": "greet",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {
+          "query": "yo jarvis"
+        }
+      }
+    },
+    {
+      "say": "tu peux faire quoi exactement",
+      "expected": "help",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "c'est tout pour aujourd'hui, merci",
+      "expected": "quit",
+      "reason": "action greet",
+      "got": {
+        "action": "greet",
+        "args": {}
+      }
+    },
+    {
+      "say": "tu peux t'arrêter",
+      "expected": "quit",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "mets à jour mes pilotes",
+      "expected": "open_app",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "fais une recherche sur les trous noirs",
+      "expected": "google_search",
+      "reason": "query 'black holes'",
+      "got": {
+        "action": "google_search",
+        "args": {
+          "query": "black holes"
+        }
+      }
+    },
+    {
+      "say": "google comment changer un pneu",
+      "expected": "google_search",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {
+          "query": "comment changer un pneu"
+        }
+      }
+    },
+    {
+      "say": "search python tutorial",
+      "expected": "google_search",
+      "reason": "action open_app",
+      "got": {
+        "action": "open_app",
+        "args": {
+          "app": "vscode"
+        }
+      }
+    },
+    {
+      "say": "quel temps fera-t-il demain",
+      "expected": [
+        "google_search",
+        "unknown"
+      ],
+      "reason": "action get_time",
+      "got": {
+        "action": "get_time",
+        "args": {}
+      }
+    },
+    {
+      "say": "remets le son",
+      "expected": "volume",
+      "reason": "level 'down'",
+      "got": {
+        "action": "volume",
+        "args": {
+          "level": "down"
+        }
+      }
+    },
+    {
+      "say": "mets le volume au maximum",
+      "expected": "volume",
+      "reason": "level 'up'",
+      "got": {
+        "action": "volume",
+        "args": {
+          "level": "up"
+        }
+      }
+    },
+    {
+      "say": "volume à fond",
+      "expected": "volume",
+      "reason": "level 'up'",
+      "got": {
+        "action": "volume",
+        "args": {
+          "level": "up"
+        }
+      }
+    },
+    {
+      "say": "pause",
+      "expected": "media_play_pause",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "jarvis met la musique suivante",
+      "expected": "media_next",
+      "reason": "action media_play_pause",
+      "got": {
+        "action": "media_play_pause",
+        "args": {}
+      }
+    },
+    {
+      "say": "skip",
+      "expected": "media_next",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "zappe ce morceau",
+      "expected": "media_next",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "remets la chanson d'avant",
+      "expected": "media_previous",
+      "reason": "action media_play_pause",
+      "got": {
+        "action": "media_play_pause",
+        "args": {}
+      }
+    },
+    {
+      "say": "reviens au morceau précédent",
+      "expected": "media_previous",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "cache tout",
+      "expected": "minimize",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "copie bonjour à tous dans le presse-papiers",
+      "expected": "clipboard_write",
+      "reason": "text 'bonjour tout le monde'",
+      "got": {
+        "action": "clipboard_write",
+        "args": {
+          "text": "bonjour tout le monde"
+        }
+      }
+    },
+    {
+      "say": "souviens-toi que je m'appelle Dan",
+      "expected": "remember",
+      "reason": "action recall",
+      "got": {
+        "action": "recall",
+        "args": {
+          "key": "nom"
+        }
+      }
+    },
+    {
+      "say": "note que l'anniversaire de maman est le 12 mars",
+      "expected": "remember",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "tu te souviens de quoi ?",
+      "expected": "list_memory",
+      "reason": "action recall",
+      "got": {
+        "action": "recall",
+        "args": {
+          "key": "last_remembered"
+        }
+      }
+    },
+    {
+      "say": "ferme discord",
+      "expected": "unknown",
+      "reason": "action open_app",
+      "got": {
+        "action": "open_app",
+        "args": {
+          "app": "discord"
+        }
+      }
+    },
+    {
+      "say": "ferme spotify",
+      "expected": "unknown",
+      "reason": "action open_app",
+      "got": {
+        "action": "open_app",
+        "args": {
+          "app": "spotify"
+        }
+      }
+    },
+    {
+      "say": "installe photoshop",
+      "expected": "unknown",
+      "reason": "action open_app",
+      "got": {
+        "action": "open_app",
+        "args": {
+          "app": "photoshop"
+        }
+      }
+    }
+  ]
+}
