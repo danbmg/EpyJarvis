@@ -1,0 +1,149 @@
+# Configuration de Jarvis : modèle versionné.
+# Pour la personnaliser, copie ce fichier en config.yaml (non versionné, lu en priorité).
+# Les chemins relatifs sont relatifs au dossier du projet.
+
+assistant:
+  greeting: Jarvis en ligne. Qu'est-ce que je peux faire pour toi ?
+  farewell: Extinction. À bientôt.
+  # Annonce au lancement, une fois Jarvis prêt (vide : aucune). startup_speech : ce qui est prononcé, ici en
+  # phonèmes Piper ([[ ... ]]) pour un « Jarvis Activated » à l'anglaise avec la voix française (Whisper le
+  # retranscrit bien « Jarvis Activated. ») ; sans cette ligne, startup_phrase est lu tel quel.
+  startup_phrase: Jarvis Activated.
+  startup_speech: "[[ dʒˈaʁvis, aktivˈɛjtɛd. ]]"
+  listen_on_start: true   # micro ouvert juste après l'annonce : on parle sans dire « Ok Jarvis »
+
+logging:
+  level: INFO
+  file: jarvis.log
+
+# Cerveau de l'agent : choisit et enchaîne les outils (Ollama doit tourner en local)
+llm:
+  model: qwen3:8b      # choisi le 03/11/2026 : 90-92 % au benchmark contre 84 % pour qwen2.5:7b
+  base_url: http://127.0.0.1:11434   # pas "localhost" : sous Windows il tente l'IPv6 d'abord (+2 s)
+  timeout: 60          # secondes par requête (une fenêtre lue peut faire un long prompt)
+  keep_alive: 30m      # garde le modèle en mémoire GPU entre deux commandes
+  num_ctx: 16384       # taille du contexte : prompt + outils + fenêtres lues dépassent les 4096 par défaut
+  think: false         # coupe la « réflexion » des modèles qui en ont (Qwen3...) : trop lente pour la voix
+  autostart: true      # lance « ollama serve » (sans fenêtre) au démarrage de Jarvis s'il ne tourne pas
+
+# Reconnaissance vocale (faster-whisper)
+stt:
+  model: large-v3-turbo  # tiny, base, small, medium, large-v3-turbo (small si pas de GPU)
+  device: cuda         # cuda (repli automatique sur cpu si échec) ou cpu
+  language: fr
+  prompt: Jarvis, ouvre Discord, lance Spotify, mets en pause, monte le son, chanson suivante, mets un pouce sur YouTube, Twitch, Steam. Ajoute un rendez-vous à mon agenda, réunion, créneau libre.
+  silence_threshold: 0.008   # niveau sonore sous lequel on considère que c'est le silence
+  silence_duration: 1.2      # secondes de silence qui terminent la phrase
+  max_duration: 15           # durée maximale d'un enregistrement
+
+# Synthèse vocale hors ligne (Piper). Voix : https://huggingface.co/rhasspy/piper-voices
+tts:
+  enabled: true
+  voice: fr_FR-tom-medium
+  voices_dir: voices
+
+# Mot d'activation « Ok Jarvis ». Aucun modèle openwakeword n'existe pour cette phrase : un détecteur de voix découpe
+# ce qui est dit et Whisper en transcrit le début. « Ok Jarvis, lance Spotify » marche d'une traite.
+# phrase vide : ancien modèle openwakeword (« Hey Jarvis » : model, threshold, cooldown).
+wakeword:
+  enabled: true
+  phrase: ok jarvis
+  vad_threshold: 0.5   # détecteur de voix : plus haut = ignore davantage les bruits et la musique
+  model: hey_jarvis
+  threshold: 0.5       # plus haut = moins de faux déclenchements
+  cooldown: 3.0
+
+memory:
+  db_path: jarvis_memory.db
+
+# Spotify (Web API, Premium requis). Application développeur « Jarvis (local) » sur
+# developer.spotify.com, connexion PKCE sans secret. Connexion une seule fois :
+#   .\.venv\Scripts\python.exe -m jarvis.tools.spotify login
+spotify:
+  client_id: ""       # à remplir : Client ID de ta propre application Spotify
+  redirect_uri: http://127.0.0.1:8765/callback   # doit être identique à celle de l'application
+  token_file: spotify_token.json                  # jeton personnel : ne pas partager
+
+# Google Agenda (API Google Calendar v3), projet Google Cloud « Jarvis », client OAuth « Application de bureau ».
+# Connexion une seule fois (le navigateur s'ouvre ; PKCE, retour sur 127.0.0.1) :
+#   .\.venv\Scripts\python.exe -m jarvis.tools.agenda login     (puis : status, logout)
+# Le fichier client JSON est importé chiffré (DPAPI) dans %LOCALAPPDATA%\Jarvis avec le jeton : il peut ensuite
+# être supprimé du projet. Rien de secret n'est écrit ici.
+google_calendar:
+  account: ""                       # à remplir : ton adresse Gmail, seul compte accepté à la connexion
+  client_file: secret_google_calendar.json
+  default_calendar: ""              # vide : l'agenda principal ; sinon le nom d'un calendrier
+  aliases: {}                       # autres noms dits -> nom du calendrier (ex. perso: Mon calendrier)
+  default_duration: 60              # minutes, quand la durée n'est pas dite
+  day_start: "08:00"                # plage des créneaux libres et des propositions en cas de conflit
+  day_end: "20:00"
+  min_free: 30                      # minutes : créneau libre le plus court annoncé
+  ignore_for_conflicts: []          # calendriers à ne pas compter (jours fériés et anniversaires exclus d'office)
+
+# Applications. Toutes celles du menu Démarrer sont trouvées automatiquement ;
+# cette liste ajoute des alias et des modes de lancement particuliers.
+#   path    : exécutable, raccourci .lnk ou appli du Store (shell:AppsFolder\...)
+#   command : sinon, nom de la commande cherchée dans le PATH
+#   aliases : autres noms possibles à l'oral
+apps:
+  - name: vscode
+    label: Visual Studio Code
+    command: code
+    aliases: [vs code, visual studio code, visual studio, éditeur de code]
+  - name: explorer
+    label: l'explorateur de fichiers
+    command: explorer
+    aliases: [explorateur, fichiers, explorateur de fichiers, mes documents]
+  - name: notepad
+    label: le bloc-notes
+    command: notepad
+    aliases: [bloc-notes, bloc notes, éditeur de texte]
+  - name: calculator
+    label: la calculatrice
+    command: calc
+    aliases: [calculatrice, calc]
+  - name: terminal
+    label: le terminal
+    command: wt
+    aliases: [powershell, invite de commandes, cmd, console]
+  - name: discord
+    label: Discord
+    path: '%LOCALAPPDATA%\Discord\Update.exe'
+    args: [--processStart, Discord.exe]
+  - name: whatsapp
+    label: WhatsApp
+    path: 'shell:AppsFolder\5319275A.WhatsAppDesktop_cv1g1gvanyjgm!App'
+    aliases: [whats app]
+  - name: spotify
+    label: Spotify
+    path: '%APPDATA%\Spotify\Spotify.exe'
+    aliases: [musique]
+  - name: steam
+    label: Steam
+    path: 'C:\Program Files (x86)\Steam\steam.exe'
+  - name: battlenet
+    label: Battle.net
+    path: 'C:\Program Files (x86)\Battle.net\Battle.net Launcher.exe'
+    aliases: [battle.net, battle net, blizzard, bnet]
+  - name: minecraft
+    label: Minecraft
+    path: 'shell:AppsFolder\Microsoft.4297127D64EC6_8wekyb3d8bbwe!Minecraft'
+    aliases: [mc]
+  - name: adwcleaner
+    label: AdwCleaner
+    path: 'C:\Program Files\Malwarebytes\AdwCleaner\adwcleaner.exe'
+    aliases: [adw cleaner, adw]
+  - name: drivereasy
+    label: Driver Easy
+    path: 'C:\Program Files\Easeware\DriverEasy\DriverEasy.exe'
+    aliases: [driver easy, pilotes, drivers]
+  - name: ccleaner
+    label: CCleaner
+    path: 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\CCleaner 7.lnk'
+    aliases: [cc cleaner, nettoyeur]
+  - name: devmgmt
+    label: le Gestionnaire de périphériques
+    path: '%SystemRoot%\System32\devmgmt.msc'
+    aliases: [gestionnaire de périphériques, gestionnaire des périphériques, périphériques, device manager]
+
+# Les jeux Steam sont lus directement dans la bibliothèque Steam installée.

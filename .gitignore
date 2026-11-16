@@ -1,0 +1,32 @@
+# Secrets et jetons : ne jamais publier
+secret_google_calendar.json
+client_secret*.json
+spotify_token.json
+.env
+.env.*
+*.bin
+*.bak-*
+*.tmp
+
+# Configuration personnelle (le modèle versionné est config.example.yaml)
+config.yaml
+
+# Données personnelles locales
+jarvis.log
+jarvis.log.*
+jarvis_memory.db
+*.zip
+
+# Notes de travail internes
+CONTEXT.md
+.claude/
+
+# Modèles téléchargés au premier lancement (voix Piper)
+voices/
+*.onnx
+*.onnx.json
+
+# Environnement Python
+.venv/
+__pycache__/
+*.pyc
