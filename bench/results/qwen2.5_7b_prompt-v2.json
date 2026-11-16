@@ -1,0 +1,54 @@
+{
+  "summary": {
+    "model": "qwen2.5:7b",
+    "accuracy": 97.1,
+    "passed": 134,
+    "total": 138,
+    "latency_ms_mean": 401,
+    "latency_ms_p95": 494
+  },
+  "failures": [
+    {
+      "say": "mets à jour mes pilotes",
+      "expected": "open_app",
+      "reason": "action launch_game",
+      "got": {
+        "action": "launch_game",
+        "args": {
+          "game": "drivereasy"
+        }
+      }
+    },
+    {
+      "say": "remets le son",
+      "expected": "volume",
+      "reason": "level 'up'",
+      "got": {
+        "action": "volume",
+        "args": {
+          "level": "up"
+        }
+      }
+    },
+    {
+      "say": "cache tout",
+      "expected": "minimize",
+      "reason": "action unknown",
+      "got": {
+        "action": "unknown",
+        "args": {}
+      }
+    },
+    {
+      "say": "quelle est la capitale du Japon",
+      "expected": "unknown",
+      "reason": "action google_search",
+      "got": {
+        "action": "google_search",
+        "args": {
+          "query": "capitale du Japon"
+        }
+      }
+    }
+  ]
+}

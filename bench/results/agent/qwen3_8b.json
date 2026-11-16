@@ -1,0 +1,49 @@
+{
+  "summary": {
+    "model": "qwen3:8b",
+    "accuracy": 98.9,
+    "passed": 174,
+    "total": 176,
+    "native_calls": 99.2,
+    "shortcuts": 45,
+    "latency_ms_mean": 494,
+    "latency_ms_p95": 1006,
+    "by_category": {
+      "direct": "8/8",
+      "interdits": "11/11",
+      "applications": "20/21",
+      "interface": "8/8",
+      "web": "11/11",
+      "steam": "12/12",
+      "son_et_medias": "9/9",
+      "spotify": "14/14",
+      "bureau": "4/4",
+      "memoire": "7/7",
+      "systeme": "10/10",
+      "minuteurs": "6/6",
+      "messages": "16/16",
+      "multi_etapes": "3/3",
+      "multi_tours": "8/8",
+      "todo": "10/10",
+      "agenda": "17/18"
+    }
+  },
+  "failures": [
+    {
+      "category": "applications",
+      "say": "j'ai envie de coder",
+      "expected": "open_app",
+      "reason": "aucun outil",
+      "got": "texte : Ouvre Visual Studio Code.",
+      "native": false
+    },
+    {
+      "category": "agenda",
+      "say": "mets le dentiste mardi à 9 h dans mon calendrier perso",
+      "expected": "agenda",
+      "reason": "calendar None",
+      "got": "agenda({\"action\": \"add\", \"when\": \"mardi à 9 h\", \"title\": \"dentiste\"})",
+      "native": true
+    }
+  ]
+}
